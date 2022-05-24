@@ -68,6 +68,25 @@ class Quadrado{
     
         return $stmt->execute();
     }
+
+    public function listar($buscar = 0, $procurar = ""){
+        $pdo = Conexao::getInstance();
+        $sql = "SELECT * FROM quadrado";
+        if($buscar > 0)
+            switch($buscar){
+                case(1):$sql .= " WHERE id = :procurar"; break;
+                case(2):$sql .= " WHERE lado like :procurar"; break;
+                case(3):$sql .= " WHERE cor like :procurar"; break;
+            }
+        $stmt= $pdo->prepare($sql);
+        if ($buscar>0){
+            $stmt->bindValue(':procurar',$procurar,PDO::PARAM_STR);
+        
+        $stmt->execute();
+        return $stmt->fetchAll();
+        }
+
+    }
         
         }
 
