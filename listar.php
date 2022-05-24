@@ -35,14 +35,14 @@
 <body class="">
 
 <form method="post">
-                <input type="radio" name="buscar" value="1" <?php if ($buscar == "1") echo "checked" ?>> Id<br>
-                <input type="radio" name="buscar" value="2" <?php if ($buscar == "2") echo "checked" ?>> lado<br>
-                <input type="radio" name="buscar" value="3" <?php if ($buscar == "3") echo "checked" ?>> Cor<br>
-        <h3>Procurar Quadrado:</h3>
+        <input type="radio" name="buscar" value="1" <?php if ($buscar == "1") echo "checked" ?>> Id<br>
+        <input type="radio" name="buscar" value="2" <?php if ($buscar == "2") echo "checked" ?>> lado<br>
+        <input type="radio" name="buscar" value="3" <?php if ($buscar == "3") echo "checked" ?>> Cor<br>
+    <h3>Procurar Quadrado:</h3>
         <input type="text" name="procurar" id="procurar" size="25" value="<?php echo $procurar;?>">
-        <br><br>
+            <br><br>
         <button name="acao" id="acao" type="submit">Procurar </button>
-        <br><br>
+            <br><br>
 </form>
 
 <?php
