@@ -1,20 +1,24 @@
 <?php
 require_once "conf/Conexao.php";
 class Quadrado{
-    private $id;
+    private $idquadrado;
     private $lado;
     private $cor; 
-    public function __construct($id, $lado, $cor){ 
-        $this->setId  ($id);
+    private $tabuleiro_idtabuleiro; 
+    public function __construct($idquadrado, $lado, $cor, $tabuleiro_idtabuleiro){ 
+        $this->setidquadrado  ($idquadrado);
         $this->setLado  ($lado);
         $this->setCor ($cor);
+        $this->settabuleiro_idtabuleiro ($tabuleiro_idtabuleiro);
     }
-    public function getId(){ return $this->id; }
-    public function setId($id){ $this->id = $id;}
+    public function getidquadrado(){ return $this->idquadrado; }
+    public function setidquadrado($idquadrado){ $this->idquadrado = $idquadrado;}
     public function getLado() {return $this->lado;}
     public function getCor() {return $this->cor;}
     public function setLado($lado){if ($lado >  0)$this->lado = $lado;}
     public function setCor($cor){if (strlen($cor) > 0)$this->cor = $cor;}
+    public function gettabuleiro_idtabuleiro() {return $this->tabuleiro_idtabuleiro;}
+    public function settabuleiro_idtabuleiro($tabuleiro_idtabuleiro){if ($tabuleiro_idtabuleiro >  0)$this->tabuleiro_idtabuleiro = $tabuleiro_idtabuleiro;}
 
     public function Area(){
         $area = $this->lado * $this->lado;
@@ -41,31 +45,33 @@ class Quadrado{
 
     public function salvar(){
         $pdo = Conexao::getInstance();
-        $stmt = $pdo->prepare('INSERT INTO quadrado (lado,cor) VALUES(:lado, :cor)');
+        $stmt = $pdo->prepare('INSERT INTO quadrado (lado, cor, tabuleiro_idtabuleiro) VALUES(:lado, :cor, :tabuleiro_idtabuleiro)');
         $stmt->bindValue(':lado', $this->getLado());
         $stmt->bindValue(':cor', $this->getCor());
+        $stmt->bindValue(':tabuleiro_idtabuleiro', $this->gettabuleiro_idtabuleiro());
         return $stmt->execute();
 
     }
 
-    function excluir($id){
+    function excluir($idquadrado){
         $pdo = Conexao::getInstance();
-        $stmt = $pdo ->prepare('DELETE FROM quadrado WHERE id = :id');
-        $stmt->bindValue(':id', $id);
-                
+        $stmt = $pdo ->prepare('DELETE FROM quadrado WHERE idquadrado = :idquadrado');
+        $stmt->bindValue(':idquadrado', $idquadrado);        
     return $stmt->execute();
     
     }
 
     public function editar(){
         $pdo = Conexao::getInstance();
-        $stmt = $pdo->prepare('UPDATE quadrado SET lado = :lado, cor = :cor
-        WHERE id = :id');
-    
-        $stmt->bindValue(':id', $this->getId());
+        $stmt = $pdo->prepare('UPDATE trabalho.quadrado SET lado = :lado, cor = :cor, tabuleiro_idtabuleiro = :tabuleiro_idtabuleiro
+        WHERE idquadrado = :idquadrado');
+
+
+        $stmt->bindValue(':idquadrado', $this->getidquadrado());
         $stmt->bindValue(':lado', $this->getLado());
         $stmt->bindValue(':cor', $this->getCor());
-    
+        $stmt->bindValue(':tabuleiro_idtabuleiro', $this->gettabuleiro_idtabuleiro());
+
         return $stmt->execute();
     }
 
@@ -74,17 +80,24 @@ class Quadrado{
         $sql = "SELECT * FROM quadrado";
         if ($buscar > 0)
             switch($buscar){
-                case(1): $sql .= " WHERE id = :procurar"; break;
+                case(1): $sql .= " WHERE idquadrado = :procurar"; break;
                 case(2): $sql .= " WHERE lado like :procurar"; break;
                 case(3): $sql .= " WHERE cor like :procurar"; break;
-            }
-        $stmt = $pdo->prepare($sql);
+    }
+
+    $stmt = $pdo->prepare($sql);
         if ($buscar > 0)
             $stmt->bindValue(':procurar', $procurar, PDO::PARAM_STR);
-        $stmt->execute();
+            $stmt->execute();
         return $stmt->fetchAll();
     }
     
+    function desenhar(){
+        $str = "<div style='width: ".$this->getLado()."px; height: ".$this->getLado()."px; background: ".$this->getCor()."'></div>";
+    return $str;
+    }
+
+
 
 }
         
