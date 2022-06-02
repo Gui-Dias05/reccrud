@@ -33,7 +33,7 @@
         $dados = array();
         while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
             $dados['idtabuleiro'] = $linha['idtabuleiro'];
-            $dados['lado'] = $linha['lado'];
+            $dados['lado'] = $linha['lado']; 
         }
         return $dados;
     }

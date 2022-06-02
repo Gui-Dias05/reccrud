@@ -80,7 +80,7 @@ class tabuleiro{
         return $stmt->fetchAll();
     }
 
-    function desenhar(){
+    public function desenhar(){
 
 
         $str = "<div style='width: ".$this->getLado()."px; height: ".$this->getLado()."px;></div>";

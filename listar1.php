@@ -14,7 +14,7 @@
     if ($idtabuleiro > 0)
         $dados = buscarDados($idtabuleiro);
     }
-
+ 
     $procurar = isset($_POST["procurar"]) ? $_POST["procurar"] : ""; 
     $buscar = isset($_POST['buscar']) ? $_POST['buscar'] : 0;
 ?>

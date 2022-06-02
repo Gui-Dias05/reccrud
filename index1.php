@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <?php
+    $title = "Tabuleiro";
+    $lado = isset($_POST['lado']) ? $_POST['lado'] : 0;
+    $cor = isset($_POST['cor']) ? $_POST['cor'] : "";
+    //var_dump($dados);
     include_once "processa1.php";
-    require_once "classe/ClassTabuleiro.php";
-    $idtabuleiro = isset($_GET['idtabuleiro']) ? $_GET['idtabuleiro'] : "";
     $acao = isset($_GET['acao']) ? $_GET['acao'] : "";
-    //var_dump($dados);
+    $dados;
     if ($acao == 'editar'){
-       $tab = new Tabuleiro($idtabuleiro, 1);
-       $lista = $tab->listar("", $idtabuleiro);
-       $tab->setLado($lista[0]['lado']);
-
-}
-    $title = "Cadastro de Tabuleiro";
-    //var_dump($dados);
+        $idtabuleiro = isset($_GET['idtabuleiro']) ? $_GET['idtabuleiro'] : "";
+    if ($idtabuleiro > 0)
+        $dados = buscarDados($idtabuleiro);
+        //var_dump($dados);
+    }
 ?>
-<html>
+
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title> <?php echo $title; ?> </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><?php echo $title ?></title>
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <style>
     </style>
 </head>
-<body class="">
-<?php
-    
-    
-    ?>
+<body>
+    <br>
+        <h3>Insira os dados do Tabuleiro</h3><hr>
+            <form method="post" action="processa1.php">
 
-    <form action="processa1.php" method="post">
-        <input readonly type="hidden" name="idtabuleiro" idtabuleiro="idtabuleiro" value="<?php if ($acao == "editar") echo $dados['idtabuleiro']; else echo 0; ?>">
-       <p>Lado:</p>
-                <input require="true" type="text" name="lado" idtabuleiro="lado" placeholder="Digite o tamanho do lado" 
+            <input readonly type="hidden" name="idtabuleiro" id="idtabuleiro" value="<?php if ($acao == "editar") echo $dados['idtabuleiro']; 
+            else echo 0; ?>">
+                
+            <p>Lado:</p>
+                <input require="true" type="text" name="lado" id="lado" placeholder="Digite o tamanho do lado" 
                 value="<?php if ($acao == "editar") echo $dados['lado'];?>"><br>
 
-       <button type="submit" name="acao" id="acao" value="salvar">Salvar</button>
-    </form><br>
-
-    <button><a href='listar1.php'>Listar</a> </button>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    
+            <br>
+            <hr>
+            <br>
+                <button name="acao" value="salvar" id="acao" type="submit">Salvar</button>
+            </form>
+            <br> 
 </body>
 </html>
