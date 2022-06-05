@@ -98,6 +98,17 @@ class Usuario{
         return $str;
     }
 
+    public function efetuarlogin($user, $senha) {
+        $pdo = Conexao::getInstance();
+        $user = $pdo->select('usuario', 'nome', "user = '$user' AND senha = '$senha'")->fetchAll(PDO::FETCH_ASSOC);
+        if($user){
+            $_SESSION["nome"] = $user[0]['nome'];
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
 
 }

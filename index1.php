@@ -18,30 +18,40 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <?php include_once "menu.php"; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> 
     <title><?php echo $title ?></title>
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <style>
     </style>
 </head>
-<body>
+<body style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" style="background-color: #f5f5dc; ">
     <br>
-        <h3>Insira os dados do Tabuleiro</h3><hr>
+        <h3>Insira os dados do Tabuleiro</h3><hr> 
             <form method="post" action="processa1.php">
 
             <input readonly type="hidden" name="idtabuleiro" id="idtabuleiro" value="<?php if ($acao == "editar") echo $dados['idtabuleiro']; 
             else echo 0; ?>">
                 
-            <p>Lado:</p>
-                <input require="true" type="text" name="lado" id="lado" placeholder="Digite o tamanho do lado" 
+            <h5>Lado:</h5>
+                <input class="btn btn-dark" require="true" type="text" name="lado" id="lado" placeholder="Digite o tamanho do lado" 
                 value="<?php if ($acao == "editar") echo $dados['lado'];?>"><br>
 
             <br>
-            <hr>
-            <br>
-                <button name="acao" value="salvar" id="acao" type="submit">Salvar</button>
+
+                <button class="btn btn-dark" name="acao" value="salvar" id="acao" type="submit">Salvar</button>
             </form>
-            <br> 
+            <br>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script> 
+            
+        <style>
+        a, a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        body{
+            background-color: #d3d3d3;
+        }
+        </style>
 </body>
 </html>

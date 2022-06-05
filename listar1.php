@@ -27,25 +27,27 @@
                 location.href = url;
         }
     </script>
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <style>
-    </style>
+    <?php include_once "menu.php"; ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+   
 </head>
-<body style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" style="background-color: #f5f5dc; ">
-
-<form method="post">
-        <input type="radio" name="buscar" value="1" <?php if ($buscar == "1") echo "checked" ?>> idtabuleiro<br>
-        <input type="radio" name="buscar" value="2" <?php if ($buscar == "2") echo "checked" ?>> lado<br>
-            <h3>Procurar tabuleiro:</h3>
-        <input type="text" name="procurar" idtabuleiro="procurar"  value="<?php echo $procurar;?>">
+    <body style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" >
+        <div style="padding-left: 3vw;">
+                <legend>Procurar: </legend>
+        <form method="post">
+            <h6><input class="form-check-input mt-0" style="background-color: #2e2e2e;" type="radio" name="buscar" value="1" <?php if ($buscar == "1") echo "checked" ?>> ID Tabuleiro</h6>
+            <h6><input class="form-check-input mt-0" style="background-color: #2e2e2e;" type="radio" name="buscar" value="2" <?php if ($buscar == "2") echo "checked" ?>> Lado</h6>
+                <br><h3>Procurar tabuleiro:</h3>
+            <input class="btn btn-dark" type="text" style="width: 25vw;" name="procurar" idtabuleiro="procurar"  value="<?php echo $procurar;?>">
                 <br><br>
-        <button name="acao" idtabuleiro="acao" type="submit">Procurar</button>
+        <button class="btn btn-dark" name="acao" idtabuleiro="acao" type="submit">Procurar</button>
         <br><br>
+    </div>
     </form>
         <div>
-            <table>
+            <table class="table table-dark table-striped">
                 <thead>
-                    <tr>
+                    <tr class="table-dark">
                         <th scope="col">ID tabuleiro</th>
                         <th scope="col">Lado</th>
                         <th scope="col">Mostrar</th>
@@ -62,7 +64,7 @@
                     <tr>
                         <th scope="row"><?php echo $linha['idtabuleiro'];?></th>
                         <th scope="row"><?php echo $linha['lado'];?></th>
-                        <td scope="row"><a href="mostrar1.php?idtabuleiro=<?php echo $linha['idtabuleiro']; ?>&lado=<?php echo $linha['lado'];?>">tabuleiro</a></td>
+                        <td scope="row"><a href="mostrar1.php?idtabuleiro=<?php echo $linha['idtabuleiro']; ?>&lado=<?php echo $linha['lado'];?>">Tabuleiro</a></td>
                         <td scope="row"><a href="index1.php?acao=editar&idtabuleiro=<?php echo $linha['idtabuleiro'];?>"><img src="img/editar.png" style="width: 3vw;"></a> <br></td>
                         <td><?php echo " <a href=javascript:excluirRegistro('processa1.php?acao=excluir&idtabuleiro={$linha['idtabuleiro']}')>";?><img src="img/excluir.png" style="width: 3vw;"></a> <br></td>
                     </tr>
@@ -70,7 +72,17 @@
                 </tbody>
             </table>
         </div>
-    <button><a href='index1.php'>Voltar</a> </button>
+        <style>
+        a, a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        body{
+            background-color: #d3d3d3;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
