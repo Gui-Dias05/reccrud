@@ -11,6 +11,8 @@ class Usuario{
         $this->setuser ($user);
         $this->setsenha ($senha);
     }
+    //construct
+
     public function getidusuario(){ return $this->idusuario; }
     public function setidusuario($idusuario){ $this->idusuario = $idusuario;}
     public function getnome() {return $this->nome;}
@@ -19,6 +21,7 @@ class Usuario{
     public function setuser($user){if (strlen($user) > 0)$this->user = $user;}
     public function getsenha() {return $this->senha;}
     public function setsenha($senha){if ($senha >  0)$this->senha = $senha;}
+    //get e set
 
     /*public function Area(){
         $area = $this->nome * $this->nome;
@@ -52,15 +55,15 @@ class Usuario{
         return $stmt->execute();
 
     }
+    // criação função salvar 
 
-    function excluir($idusuario){
+    public function excluir($idusuario){
         $pdo = Conexao::getInstance();
         $stmt = $pdo ->prepare('DELETE FROM usuario WHERE idusuario = :idusuario');
-        $stmt->bindValue(':idusuario', $idusuario);
-                
-    return $stmt->execute();
-    
+        $stmt->bindValue(':idusuario', $idusuario);    
+        return $stmt->execute();
     }
+    // criação função excluir
 
     public function editar(){
         $pdo = Conexao::getInstance();
@@ -71,9 +74,9 @@ class Usuario{
         $stmt->bindValue(':nome', $this->getnome());
         $stmt->bindValue(':user', $this->getuser());
         $stmt->bindValue(':senha', $this->getsenha());
-    
         return $stmt->execute();
     }
+    //criação função editar
 
     public function listar($buscar = 0, $procurar = ""){
         $pdo = Conexao::getInstance();
@@ -90,13 +93,13 @@ class Usuario{
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    
-    function desenhar(){
+    //criação função listar
 
+    function desenhar(){
         $str = "<div style='width: ".$this->getnome()."px; height: ".$this->getnome()."px; background: ".$this->getuser()."'></div>";
-    
         return $str;
     }
+    //criação função desenhar e prepare
 
     public function efetuarlogin($user, $senha) {
         $pdo = Conexao::getInstance();
@@ -108,8 +111,7 @@ class Usuario{
             return false;
         }
     }
-
-
+    //criação função efetuar login
 
 }
         

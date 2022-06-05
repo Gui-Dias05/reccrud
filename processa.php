@@ -13,6 +13,7 @@
        $resultado = $quad->excluir($idquadrado);
        header("location:listar.php");
    }
+   
    $acao = isset($_POST['acao']) ? $_POST['acao'] : "";
     if ($acao == "salvar"){
         $idquadrado = isset($_POST['idquadrado']) ? $_POST['idquadrado'] : "";

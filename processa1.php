@@ -27,6 +27,7 @@
         }    
         header("location:listar1.php");    
     }     
+    
     function buscarDados($idtabuleiro){
         $pdo = Conexao::getInstance();
         $consulta = $pdo->query("SELECT * FROM tabuleiro WHERE idtabuleiro = $idtabuleiro");

@@ -5,7 +5,7 @@
     $nome = isset($_POST['nome']) ? $_POST['nome'] : 0;
     $user = isset($_POST['user']) ? $_POST['user'] : "";
     $senha = isset($_POST['senha']) ? $_POST['senha'] : 0;
-    //var_dump($dados);
+    //variáveis
 
     include_once "processa2.php";
     $acao = isset($_GET['acao']) ? $_GET['acao'] : "";
@@ -28,8 +28,8 @@
     <title><?php echo $title ?></title>
 </head>
 
-<body style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" style="background-color: #f5f5dc; ">
-        <h3>Insira seus dados</h3><hr>
+<body style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" >
+        <h4>Insira seus dados</h4><hr>
             <form method="post" action="processa2.php">
         <div style="padding-left: 2vw ;">
             <input readonly type="hidden" name="idusuario" idusuario="idusuario" value="<?php if ($acao == "editar") echo $dados['idusuario']; 
@@ -51,6 +51,7 @@
                 <button class="btn btn-dark" name="acao" value="salvar" id="acao" type="submit">Salvar</button>
             </form>
         </div>
+        <!--Inputs-->
             <br> 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script> 
             
@@ -63,5 +64,6 @@
             background-color: #d3d3d3;
         }
         </style>
+        <!--Parte do estilo-->
 </body>
 </html>

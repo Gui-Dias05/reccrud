@@ -7,26 +7,31 @@ class tabuleiro{
         $this->setidtabuleiro  ($idtabuleiro);
         $this->setLado  ($lado);
     }
+    //construct
+
     public function getidtabuleiro(){ return $this->idtabuleiro; }
     public function setidtabuleiro($idtabuleiro){ $this->idtabuleiro = $idtabuleiro;}
     public function getLado() {return $this->lado;}
     public function setLado($lado){if ($lado >  0)$this->lado = $lado;}
-
+    //get e set
 
     public function Area(){
         $area = $this->lado * $this->lado;
         return $area;
-
     }
+    //criação função área
+
     public function Perimetro(){
         $perimetro = $this->lado + $this->lado+ $this->lado + $this->lado;
         return $perimetro;
-     
     }
+    //criação função perímetro
+
     public function Diagonal(){
         $diagonal = $this->lado * 1.44;
         return $diagonal;
     }
+    //criação função diagonal
 
     public function __toString(){
         return  "[tabuleiro]<br>Lado: ".$this->getLado()."<br>".
@@ -34,24 +39,22 @@ class tabuleiro{
         "Perimetro: ".$this->Perimetro()."<br>".
         "Diagonal: ".$this->Diagonal()."<br>";
     }
+    //criação função toString
 
     public function salvar(){
         $pdo = Conexao::getInstance();
         $stmt = $pdo->prepare('INSERT INTO tabuleiro (lado) VALUES(:lado)');
         $stmt->bindValue(':lado', $this->getLado());
-        
         return $stmt->execute();
-
     }
 
-    function excluir($idtabuleiro){
+    public function excluir($idtabuleiro){
         $pdo = Conexao::getInstance();
         $stmt = $pdo ->prepare('DELETE FROM tabuleiro WHERE idtabuleiro = :idtabuleiro');
-        $stmt->bindValue(':idtabuleiro', $idtabuleiro);
-                
-    return $stmt->execute();
-    
+        $stmt->bindValue(':idtabuleiro', $idtabuleiro);           
+        return $stmt->execute();
     }
+    //criação função excluir
 
     public function editar(){
         $pdo = Conexao::getInstance();
@@ -60,10 +63,9 @@ class tabuleiro{
     
         $stmt->bindValue(':idtabuleiro', $this->getidtabuleiro());
         $stmt->bindValue(':lado', $this->getLado());
-        
-    
         return $stmt->execute();
     }
+    //criação função editar
 
     public function listar($buscar = 0, $procurar = ""){
         $pdo = Conexao::getInstance();
@@ -79,33 +81,13 @@ class tabuleiro{
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    //criação função listar e prepare
 
     public function desenhar(){
-
-
-        $str = "<div style='width: ".$this->getLado()."px; height: ".$this->getLado()."px;></div>";
-    
+        $str = "<div style='width: ".$this->getLado()."px; height: ".$this->getLado()."px;></div>"; 
         return $str;
     }
-    public function buscar($idtabuleiro){
-        require_once("conf/Conexao.php");
-
-        $conexao = Conexao::getInstance();
-
-        $query = 'SELECT * FROM tabuleiro';
-        if($idtabuleiro > 0){
-            $query .= ' WHERE idtabuleiro = :Id';
-            $stmt->bindParam(':Idtabuleiro', $idtabuleiro);
-        }
-            $stmt = $conexao->prepare($query);
-            if($stmt->execute())
-                return $stmt->fetchAll();
-    
-            return false;
-    }
-
-        
-    
+    //criação função desenhar
 
 }
         

@@ -20,10 +20,9 @@
     <?php include_once "menu.php"; ?>
     <meta charset="UTF-8">
         <title> <?php echo $title; ?> </title>
-        <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
-    <body class="">
-    <button><a href="listar.php">voltar</a></button><br>
+    <body style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
 <?php
     
     $quad= new Quadrado($idquadrado, $lado, $cor, $idtabuleiro);
@@ -31,8 +30,14 @@
     echo $quad->desenhar();
     ?> 
         
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="bootstrap/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     
+        <style>
+        body{
+            background-color: #d3d3d3;
+        }
+        </style>
+        <!--Parte do estilo-->
+
     </body>
 </html>
