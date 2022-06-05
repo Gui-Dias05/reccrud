@@ -17,6 +17,7 @@
             border: 1px solid; 
         }*/
     </style>
+    <?php include_once "menu.php"; ?>
     <meta charset="UTF-8">
         <title> <?php echo $title; ?> </title>
         <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">

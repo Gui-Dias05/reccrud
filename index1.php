@@ -4,6 +4,7 @@
     $lado = isset($_POST['lado']) ? $_POST['lado'] : 0;
     $cor = isset($_POST['cor']) ? $_POST['cor'] : "";
     //var_dump($dados);
+    
     include_once "processa1.php";
     $acao = isset($_GET['acao']) ? $_GET['acao'] : "";
     $dados;
@@ -26,10 +27,9 @@
     </style>
 </head>
 <body style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" style="background-color: #f5f5dc; ">
-    <br>
         <h3>Insira os dados do Tabuleiro</h3><hr> 
             <form method="post" action="processa1.php">
-
+        <div style="padding-left: 2vw ;">
             <input readonly type="hidden" name="idtabuleiro" id="idtabuleiro" value="<?php if ($acao == "editar") echo $dados['idtabuleiro']; 
             else echo 0; ?>">
                 
@@ -41,6 +41,7 @@
 
                 <button class="btn btn-dark" name="acao" value="salvar" id="acao" type="submit">Salvar</button>
             </form>
+        </div>
             <br>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script> 
             

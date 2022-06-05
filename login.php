@@ -11,15 +11,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>user</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <title>user</title>
 </head>
 <body>
     <header>
         <?php include_once "menu.php"; ?>
     </header>
     <content>
-        <a href='listar2.php'></a><br><hr>
+        <a href='listar2.php'></a><hr>
         <form action="listar2.php?command=user" method="post" id="form" style="padding-left: 5vw; padding-right: 5vw;">
             <h1>user</h1>
             <div class="form-group">
@@ -44,6 +43,7 @@
         ?>
         </h1>
     </content>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 <?php 
@@ -59,4 +59,5 @@
         $_SESSION["nome"] = null;
         header("location:user.php");
     }
+    
 ?>
