@@ -84,10 +84,27 @@ class tabuleiro{
     //criação função listar e prepare
 
     public function desenhar(){
-        $str = "<div style='width: ".$this->getLado()."px; height: ".$this->getLado()."px;></div>"; 
+        $str = "<div style='width: ".$this->getLado()."px; height: ".$this->getLado()."px; border: 3px solid;'></div>";
         return $str;
     }
     //criação função desenhar
+
+    public function buscar($id){
+        require_once("conf/Conexao.php");
+
+        $conexao = Conexao::getInstance();
+
+        $query = 'SELECT * FROM tabuleiro';
+        if($idtabuleiro > 0){
+            $query .= ' WHERE idtabuleiro = :Idtabuleiro';
+            $stmt->bindParam(':Idtabuleiro', $idtabuleiro);
+        }
+            $stmt = $conexao->prepare($query);
+            if($stmt->execute())
+                return $stmt->fetchAll();
+    
+            return false;
+    }
 
 }
         

@@ -1,63 +1,73 @@
-<!DOCTYPE html>
-<?php
-    require_once "classe/ClassUsuario.php";
+<?php 
+    session_start();
+    include_once "conf/default.inc.php";
+    require_once "conf/Conexao.php";
+    include_once('classe/ClassUsuario.php');
 
-    $command = isset($_GET['command']) ? $_GET['command'] : "";
-    $user = isset($_POST['user']) ? $_POST['user'] : "";
-    $senha = isset($_POST['senha']) ? $_POST['senha'] : "";
+    $user = isset($_POST["user"]) ? $_POST["user"] : "";     
+    $senha = isset($_POST["senha"]) ? $_POST["senha"] : ""; 
+    $action = isset($_GET["action"]) ? $_GET["action"] : ""; 
+    $mensagem = "";
+    
 ?>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <title>user</title>
+    <title>user</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
-<body>
-    <header>
-        <?php include_once "menu.php"; ?>
-    </header>
-    <content>
-        <a href='listar2.php'></a><hr>
-        <form action="listar2.php?command=user" method="post" id="form" style="padding-left: 5vw; padding-right: 5vw;">
-            <h1>user</h1>
-            <div class="form-group">
-                <label for="">Usuário:</label>
-                <input required type="text" class="form-control" name="user" id="user" placeholder="Digite o user" value="<?php if (isset($_POST['user'])){echo $_POST['user'];}?>">
-            </div>
-            <div class="form-group">
-                <label for="">Senha:</label>
-                <input required type="password" class="form-control" name="senha" id="senha" placeholder="Digite o senha" value="<?php if (isset($_POST['senha'])){echo $_POST['senha'];}?>">
-            </div>
-            <br>
-            <button type="submit" class="btn btn-dark" name="submit" id="submit" value="true">Enviar</button>
+<body style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+    <center>
+    <div >
+    <main><br><br><br><br><br><br><br><br>
+        <h2>User</h2> <br>
+        <form action="login.php?action=user" method="post">
+            <div>
+                <input class="btn btn-dark" type="text" name="user" id="user" required="true" placeholder="Insira o user">
+                <div class="underline"></div>
+            </div><br>
+            <div>
+                <input class="btn btn-dark" type="password" name="senha" id="senha" required="true" placeholder="Insira a senha">
+                <div class="underline"></div>
+            </div><br>
+            <input class="btn btn-dark" type="submit" value="Entrar">
         </form>
-        <hr>
-        <h1>
+        <center>
         <?php
-            if(isset($_SESSION['nome'])) {
-                echo "Logado no sistema!";
-            } else if(isset($_GET['user']) && !isset($_SESSION['nome'])) {
-                echo "Informações incorretas!";
-            }
+        error_reporting(0);
+        // print_r($_SESSION['nome']);
+            if($_GET['action'] == 'user'){
+                $usuario = new Usuario("","","","");
+                if ($usuario->efetuarlogin($user, $senha) == true){
+                    $mensagem = "O user foi efetuado com sucesso!";
+                    echo $mensagem;
+                    header("location:listar2.php");
+                } else {
+                    $mensagem = "Erro no user, confira os dados";
+                    echo $mensagem;
+                }
+            } 
         ?>
-        </h1>
-    </content>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    </main>
+    </div>
+
+    <style>
+        a, a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        body{
+            background-color: #d3d3d3;
+        }
+        </style>
+        
+        <!--Parte do estilo-->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>
 </html>
-<?php 
-    if($command == "user") {
-        try{
-            $usua = new Usuario('', '', '', '');
-            $usua->efetuarlogin("$user", "$senha");
-            header("location:listar2.php?user=true");
-        } catch(Exception $e) {
-            echo "<h1>Erro ao logar as informações.</h1><br> Erro:".$e->getMessage();
-        }
-    } else if($command == "logout") {
-        $_SESSION["nome"] = null;
-        header("location:user.php");
-    }
-    
-?>

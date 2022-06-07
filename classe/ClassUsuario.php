@@ -101,17 +101,21 @@ class Usuario{
     }
     //criação função desenhar e prepare
 
-    public function efetuarlogin($user, $senha) {
+    public function efetuarlogin($user, $senha){
         $pdo = Conexao::getInstance();
-        $user = $pdo->select('usuario', 'nome', "user = '$user' AND senha = '$senha'")->fetchAll(PDO::FETCH_ASSOC);
-        if($user){
-            $_SESSION["nome"] = $user[0]['nome'];
+        $sql = "SELECT nome FROM usuario WHERE user = '$user' AND senha = '$senha';";
+        $resultado = $pdo->query($sql)->fetchAll();
+        if($resultado){
+            $_SESSION['nome'] = $resultado[0]['nome'];
             return true;
-        }else{
+        } else {
+            $_SESSION['nome'] = null;
             return false;
         }
+    
     }
     //criação função efetuar login
+
 
 }
         
